@@ -21,8 +21,10 @@ class App extends React.Component {
     }
 
     delete = (item) => {
-        call("/todo", "DELETE", item).then((response) =>
+        call("/todo", "DELETE", item).then((response) =>{
             this.setState({ items: response.data })
+            console.log(this.state.items);
+        }
         );
     }
 
@@ -41,6 +43,7 @@ class App extends React.Component {
     render() {
         // todoItems에 this.state.items.length 가 0보다 크다면 true 이므로 && 뒤에 값을 넘겨준다. 
         // totoItem = this.state.items.length > 0 ? (<Paper></Paper>):""; 이렇게 해도 같은 결과이다. 조건선택문 ? ternary operator
+        console.log(this.state.items.length)
         var todoItems = this.state.items.length > 0 && (
             <Paper style={{ margin: 16 }}>
                 <List>
