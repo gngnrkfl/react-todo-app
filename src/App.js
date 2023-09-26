@@ -11,20 +11,17 @@ const App = () => {
 
   // add 함수 추가
   function add(item) {
-    const thisItems = items;
-    item.id = "ID-" + thisItems.length; // Key를 위한 id 추가
+    item.id = "ID-" + (items.length + 1); // Key를 위한 id 추가
     item.done = false;
-    thisItems.push(item);
-    setItems(thisItems); // update state
+    setItems([...items, item]); // update state
     console.log(items);
   }
 
   // delete 함수 추가
   function deleteList(item) {
-    const thisItems = items;
-    const newItems = thisItems.filter(e => e.id !== item.id);
-    setItems(newItems);
-    console.log(items);
+    console.log(item.id);
+    setItems(items.filter(e => e.id !== item.id));
+    console.log("items:",items);
   }
 
   var todoItems = items.length > 0 && (
@@ -36,7 +33,7 @@ const App = () => {
       </List>
     </Paper>
   );
-  
+
   return (
     <div className='App'>
       <Container maxWidth="md">
