@@ -3,10 +3,11 @@ import { DeleteOutline } from '@material-ui/icons';
 import React, { useState } from 'react';
 
 const Todo = (props) => {
-    const [state, setState] = useState({ item : props.item, readOnly: true });
+    const [state, setState] = useState({ item: props.item, readOnly: true });
 
     function deleteEventHandler() {
         props.delete(state.item);
+        props.update(state.item);
     }
 
     function offReadnOnleyMode(e) {
@@ -17,6 +18,7 @@ const Todo = (props) => {
     function enterKeyEventHandler(e) {
         if (e.key === 'Enter') {
             setState({ ...state, readOnly: true });
+            props.update(state.item);
         }
     }
 
@@ -30,7 +32,9 @@ const Todo = (props) => {
         console.log("check box event call");
         const thisItem = state.item;
         thisItem.done = thisItem.done ? false : true;
-        setState({ ...state, item: thisItem });
+        // setState({ ...state, item: thisItem });
+        setState({ readOnly: false });
+        props.update(state.item);
     }
 
     var item = state.item;

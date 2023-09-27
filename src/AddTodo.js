@@ -16,7 +16,7 @@ const AddTodo = (props) => {
 
     function enterKeyEventHandler(e) {
         if (e.key === 'Enter') {
-            this.onButtonClick();
+            onButtonClick();
         }
     }
 
