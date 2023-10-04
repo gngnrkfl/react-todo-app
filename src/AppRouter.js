@@ -5,11 +5,15 @@ import Login from "./Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import SignUp from "./SignUp";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {"Copyright ⓒ "} fsoftwareengineer, {new Date().getFullYear()} {"."} </Typography>
+            {"Copyright ⓒ "} fsoftwareengineer,
+            {new Date().getFullYear()}
+            {"."}
+        </Typography>
     );
 }
 
@@ -19,6 +23,7 @@ const AppRouter = () => {
             <div>
                 <Routes>
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
                     <Route path="/" element={<App />} />
                 </Routes>
             </div>
