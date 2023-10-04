@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { signin } from "./service/ApiService";
 import { Button, Checkbox, Container, Grid, Link, TextField, Typography } from "@material-ui/core";
-import { useCookies } from "react-cookie";
 
 const Login = (props) => {
     const [userid, setUserid] = useState("");
-    /*====== Cookie 관련 선언======*/
-    const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]); //Cookies 이름
     const [isRemember, setIsRemember] = useState(false); //아이디 저장 체크박스 체크 유무
 
     function handleSubmit(e) {
@@ -23,17 +20,17 @@ const Login = (props) => {
         setIsRemember(e.target.checked);
         console.log(userid);
         if (e.target.checked) {
-            setCookie('rememberUserId', userid, { maxAge: 2000 });
+            localStorage.setItem("rememberUserId", userid);
         } else {
-            removeCookie('rememberUserId');
+            localStorage.removeItem("rememberUserId");
         }
     }
 
     useEffect(() => {
-        console.log(cookies.rememberUserId);
-        /*저장된 쿠키값이 있으면, CheckBox TRUE 및 UserID에 값 셋팅*/
-        if (cookies.rememberUserId !== undefined) {
-            setUserid(cookies.rememberUserId);
+        let id = localStorage.getItem("rememberUserId");
+        console.log(id);
+        if (id !== null) {
+            setUserid(id);
             setIsRemember(true);
         }
     }, []);
