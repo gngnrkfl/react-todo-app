@@ -6,7 +6,7 @@ export function call(api, method, request) {
         "Content-Type": "application/json",
     });
 
-    const accessToken = localStorage.getItem("ACCESS_TOKEN");
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if (accessToken) {
         headers.append("Authorization", "Bearer " + accessToken);
     }
@@ -44,7 +44,7 @@ export function signin(userDTO) {
     return call("/auth/signin", "POST", userDTO).then((res) => {
         if (res.token) {
             // local 스토리지에 토큰 저장
-            localStorage.setItem("ACCESS_TOKEN", res.token);
+            localStorage.setItem(ACCESS_TOKEN, res.token);
             // token이 존재하는 경우 todo 화면으로 리디렉트
             window.location.href = "/";
         }
@@ -72,7 +72,7 @@ export function signup(userDTO) {
 // 로그아웃
 export function signout() {
     // local 스토리지에 토큰 삭제
-    localStorage.setItem("ACCESS_TOKEN", null);
+    localStorage.setItem(ACCESS_TOKEN, null);
     window.location.href = "/";
 }
 
