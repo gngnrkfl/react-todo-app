@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const Todo = (props) => {
     const [state, setState] = useState({ item: props.item, readOnly: true });
+    const [line, setLine] = useState("none")
 
     function deleteEventHandler() {
         props.delete(state.item);
@@ -29,10 +30,13 @@ const Todo = (props) => {
     }
 
     function checkboxEventHandler(e) {
-        console.log("check box event call");
         const thisItem = state.item;
         thisItem.done = thisItem.done ? false : true;
-        setState({ item:thisItem, readOnly: false });
+        setState({ item: thisItem, readOnly: false });
+
+        if (thisItem.done === true) { setLine("line-through"); } // 체크시 취소선
+        else { setLine("none") }
+        
         props.update(state.item);
     }
 
@@ -51,6 +55,7 @@ const Todo = (props) => {
                     onClick={offReadnOnleyMode}
                     onChange={editEventHandler}
                     onKeyDown={enterKeyEventHandler}
+                    style={{ textDecoration: line }}
                 />
             </ListItemText>
             <ListItemSecondaryAction>

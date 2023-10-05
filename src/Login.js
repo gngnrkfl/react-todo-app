@@ -16,7 +16,7 @@ const Login = (props) => {
         const password = data.get("password");
 
         // 아이디 저장을 누른 채 아이디를 변경해서 로그인 할 시
-        if (id !== email) { localStorage.setItem("rememberUserId", userid); }
+        if (id !== email && id === undefined) { localStorage.setItem("rememberUserId", userid); }
 
         // ApService의 signin 메소드를 사용해 로그인
         signin({ email: email, password: password });
