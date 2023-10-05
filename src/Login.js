@@ -72,6 +72,7 @@ const Login = (props) => {
                             label="패스워드"
                             name="password"
                             autoComplete="password"
+                            type="password"
                         />
                     </Grid>
                     <Grid item xs={12}>

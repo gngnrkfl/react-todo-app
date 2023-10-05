@@ -58,6 +58,7 @@ const SignUp = (props) => {
                         id="password"
                         label="패스워드"
                         autoFocus
+                        type="password"
                     />
                 </Grid>
                 <Grid item xs={12}>
