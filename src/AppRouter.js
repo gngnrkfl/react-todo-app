@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import SignUp from "./SignUp";
+import EditUser from "./EditUser";
 
 function Copyright() {
     return (
@@ -25,6 +26,7 @@ const AppRouter = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/" element={<App />} />
+                    <Route path="edituser" element={<EditUser />} />
                 </Routes>
             </div>
             <div>

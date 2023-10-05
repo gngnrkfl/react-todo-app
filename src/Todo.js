@@ -32,22 +32,20 @@ const Todo = (props) => {
         console.log("check box event call");
         const thisItem = state.item;
         thisItem.done = thisItem.done ? false : true;
-        // setState({ ...state, item: thisItem });
-        setState({ readOnly: false });
+        setState({ item:thisItem, readOnly: false });
         props.update(state.item);
     }
 
-    var item = state.item;
     return (
         <ListItem>
-            <Checkbox checked={item.done} onChange={checkboxEventHandler} />
+            <Checkbox checked={state.item.done} onChange={checkboxEventHandler} />
             <ListItemText>
                 <InputBase
                     inputProps={{ "aria-label": "naked", readOnly: state.readOnly }}
                     type='text'
-                    id={item.id}
-                    name={item.id}
-                    value={item.title}
+                    id={state.item.id}
+                    name={state.item.id}
+                    value={state.item.title}
                     multiline={true}
                     fullWidth={true}
                     onClick={offReadnOnleyMode}

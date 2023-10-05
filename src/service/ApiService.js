@@ -75,3 +75,15 @@ export function signout() {
     localStorage.setItem("ACCESS_TOKEN", null);
     window.location.href = "/";
 }
+
+export function edituser() { // 정보수정으로 이동
+    window.location.href = "/edituser";
+}
+
+export function edit(userDTO) {
+    return call("/auth/edit", "POST", userDTO).then((res) => {
+        if (res.id) {
+            window.location.href = "/login";
+        }
+    });
+}

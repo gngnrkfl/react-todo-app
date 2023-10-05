@@ -3,7 +3,7 @@ import './App.css';
 import Todo from './Todo'
 import AddTodo from './AddTodo'
 import { AppBar, Button, Container, Grid, List, Paper, Toolbar, Typography } from '@material-ui/core';
-import { call, signout } from './service/ApiService'
+import { call, edituser, signout } from './service/ApiService'
 
 const App = () => {
     const [items, setItems] = useState([]);
@@ -28,6 +28,14 @@ const App = () => {
         call("/todo", "PUT", item).then((response) =>
             setItems(response.data)
         );
+    }
+
+    function allDelete() {
+        items.forEach(element => {
+            if (element.done === true) {
+                deleteList(element);
+            }
+        });
     }
 
     useEffect(() => { // 새로고침
@@ -55,6 +63,9 @@ const App = () => {
                         <Typography variant='h6'>오늘의 할일</Typography>
                     </Grid>
                     <Grid item>
+                        <Button color='inherit' onClick={edituser}>
+                            Edit
+                        </Button>
                         <Button color='inherit' onClick={signout}>
                             logout
                         </Button>
@@ -72,6 +83,12 @@ const App = () => {
                 <AddTodo add={add} />
                 <div className='TodoList'>{todoItems}</div>
             </Container>
+            <Button
+                onClick={allDelete}
+                variant="contained"
+                color="primary">
+                일괄 삭제
+            </Button>
         </div>
     )
 

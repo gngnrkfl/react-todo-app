@@ -4,13 +4,19 @@ import { Button, Checkbox, Container, Grid, Link, TextField, Typography } from "
 
 const Login = (props) => {
     const [userid, setUserid] = useState("");
-    const [isRemember, setIsRemember] = useState(false); //아이디 저장 체크박스 체크 유무
+    const [isRemember, setIsRemember] = useState(false); // 아이디 저장 체크박스 체크 유무
 
     function handleSubmit(e) {
         e.preventDefault();
+        localStorage.setItem("email", userid);
+        let id = localStorage.getItem("rememberUserId"); // 정보 수정때 쓸 용도
+
         const data = new FormData(e.target);
         const email = data.get("email");
         const password = data.get("password");
+
+        // 아이디 저장을 누른 채 아이디를 변경해서 로그인 할 시
+        if (id !== email) { localStorage.setItem("rememberUserId", userid); }
 
         // ApService의 signin 메소드를 사용해 로그인
         signin({ email: email, password: password });
@@ -28,7 +34,6 @@ const Login = (props) => {
 
     useEffect(() => {
         let id = localStorage.getItem("rememberUserId");
-        console.log(id);
         if (id !== null) {
             setUserid(id);
             setIsRemember(true);
@@ -55,7 +60,7 @@ const Login = (props) => {
                             name="email"
                             autoComplete="email"
                             value={userid}
-                            onChange={(e) => {setUserid(e.target.value)}}
+                            onChange={(e) => { setUserid(e.target.value) }}
                         />
                     </Grid>
                     <Grid item xs={12}>
