@@ -1,10 +1,10 @@
 import { Checkbox, IconButton, InputBase, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Todo = (props) => {
     const [state, setState] = useState({ item: props.item, readOnly: true });
-    const [line, setLine] = useState("none")
+    const [line, setLine] = useState("")
 
     function deleteEventHandler() {
         props.delete(state.item);
@@ -36,9 +36,14 @@ const Todo = (props) => {
 
         if (thisItem.done === true) { setLine("line-through"); } // 체크시 취소선
         else { setLine("none") }
-        
+
         props.update(state.item);
     }
+
+    useEffect(() => { // 새로고침 
+        if (state.item.done === true) { setLine("line-through"); } // 체크시 취소선
+        else { setLine("none") }
+    }, []);
 
     return (
         <ListItem>
